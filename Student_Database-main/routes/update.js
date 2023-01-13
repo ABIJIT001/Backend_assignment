@@ -4,8 +4,8 @@ var async = require('async');
 const Student = require('../model/student');
 
 //submits posts
-router.patch('/:postId',async  (req,res) => {
-    const mongodoc = await Student.find({"_id" : req.params.postId})
+router.patch('/',async  (req,res) => {
+    const mongodoc = await Student.find({"_id" : req.body._id})
     const review = mongodoc[0]
     let array = Object.keys(req.body)
     const x = [] 
@@ -13,12 +13,12 @@ router.patch('/:postId',async  (req,res) => {
    async.eachSeries(array, function updateObject (obj, alldone) {
     console.log(obj)
     // Model.update(condition, doc, callback)
-     Student.findOneAndUpdate({ "_id": req.params.postId }, { $set : { [obj]: req.body[obj] }}, alldone);
+     Student.findOneAndUpdate({ "_id": req.body._id }, { $set : { [obj]: req.body[obj] }}, alldone);
 }, function allDone (err) {
 });
 
 
-const updated = await Student.findById(req.params.postId)
+const updated = await Student.findById(req.body._id)
 res.json({message: "success", data: updated})
 
 

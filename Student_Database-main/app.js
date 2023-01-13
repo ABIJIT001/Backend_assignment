@@ -18,7 +18,7 @@ const createRoute = require('./routes/create')
 app.use("/create", createRoute);
 const updateRoute = require('./routes/update')
 app.use("/update", updateRoute);
-const getRoute = require('./routes/get?_id=')
+const getRoute = require('./routes/getid')
 app.use("/get", getRoute);
 const deleteRoute = require('./routes/delete')
 app.use("/delete", deleteRoute);
@@ -26,7 +26,7 @@ app.use("/delete", deleteRoute);
 //removed the env link for privacy reason
 //you can just paste your mongodb connection link here
 mongoose.connect(
-    process.env.DB_CONNECTION,
+    process.env.DBCONNECTION,
     ()=> console.log("connected to db")
     )
 
